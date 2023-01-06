@@ -4,10 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
-@Setter
+@Setter // 얘를 어떻게 해야하나
 @NoArgsConstructor
 @Entity
-@Builder
 @ToString
 public class UserEntity {
 
