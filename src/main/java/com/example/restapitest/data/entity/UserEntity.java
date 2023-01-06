@@ -1,12 +1,10 @@
 package com.example.restapitest.data.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Builder

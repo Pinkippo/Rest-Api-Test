@@ -9,4 +9,7 @@ public interface UserService {
     Long saveUser(UserSaveRequestDTO userSaveRequestDTO);
 
     UserEntity getUser(Long id);
+
+    void update(Long id, String name, String password);
+
 }
