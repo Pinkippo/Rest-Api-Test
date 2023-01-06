@@ -7,6 +7,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -15,19 +17,24 @@ public class UserService {
     private final UserRepository userRepository;
 
     @Transactional
-    public Long saveUser(UserSaveRequestDTO userSaveRequestDTO){
+    public String saveUser(UserSaveRequestDTO userSaveRequestDTO){
 
-        return userRepository.save(userSaveRequestDTO.toEntity()).getId();
+            userRepository.save(userSaveRequestDTO.toEntity());
+            return userSaveRequestDTO.getName();
     }
 
     public UserEntity getUser(Long id){
-        UserEntity userEntity = userRepository.getById(id);
+        UserEntity userEntity = userRepository.findOne(id);
         return userEntity;
+    }
+
+    public List<UserEntity> findMembers() {
+        return userRepository.findAll();
     }
 
     @Transactional
     public void update(Long id, String name, String password){
-        UserEntity userEntity = userRepository.findById(id).orElse(null);
+        UserEntity userEntity = userRepository.findOne(id);
         userEntity.setName(name);
         userEntity.setPassword(password);
     }
