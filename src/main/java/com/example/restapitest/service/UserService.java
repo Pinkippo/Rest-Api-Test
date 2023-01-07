@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
+@RequiredArgsConstructor // final + not null 붙은 것 대신 생성자 생성 -> 의존성 주입
 @Transactional
 public class UserService {
 

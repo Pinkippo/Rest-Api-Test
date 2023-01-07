@@ -16,9 +16,9 @@ public class UserController {
 
     private final UserService userService; // 서비스 객체 생성
 
-    public UserController(UserService userService){ // 생성자로 의존성 주입
+    public UserController(UserService userService){ //
         this.userService = userService;
-    }
+    } // 생성자로 서비스 의존성 주입
 
     @PostMapping("/post1") // POST 방식 DB 저장(INSERT)
     public void PostUser(@RequestBody UserSaveRequestDTO userSaveRequestDTO){

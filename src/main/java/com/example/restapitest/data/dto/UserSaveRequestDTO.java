@@ -14,7 +14,7 @@ public class UserSaveRequestDTO {
     public UserSaveRequestDTO(String name, String password){
         this.name = name;
         this.password = password;
-    }
+    } // setter를 없애고 생성자로 데이터를 초기화 해서 계층간에 DTO가 변조되지 않게 함
 
 
     public UserEntity toEntity(){
