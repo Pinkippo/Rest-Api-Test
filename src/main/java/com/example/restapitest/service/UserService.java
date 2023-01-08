@@ -1,7 +1,7 @@
 package com.example.restapitest.service;
 
 import com.example.restapitest.data.dto.UserSaveRequestDTO;
-import com.example.restapitest.data.entity.UserEntity;
+import com.example.restapitest.data.entity.User;
 import com.example.restapitest.data.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -23,18 +23,18 @@ public class UserService {
             return userSaveRequestDTO.getName();
     }
 
-    public UserEntity getUser(Long id){
-        UserEntity userEntity = userRepository.findOne(id);
-        return userEntity;
+    public User getUser(Long id){
+        User user = userRepository.findOne(id);
+        return user;
     }
 
-    public List<UserEntity> findMembers() {
+    public List<User> findMembers() {
         return userRepository.findAll();
     }
 
     @Transactional
     public void update(Long id, String name, String password){
-        UserEntity userEntity = userRepository.findOne(id);
-        userEntity.changeUserInfo(name, password);
+        User user = userRepository.findOne(id);
+        user.changeUserInfo(name, password);
     }
 }

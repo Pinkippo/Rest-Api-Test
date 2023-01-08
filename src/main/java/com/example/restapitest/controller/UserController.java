@@ -1,7 +1,7 @@
 package com.example.restapitest.controller;
 
 import com.example.restapitest.data.dto.UserSaveRequestDTO;
-import com.example.restapitest.data.entity.UserEntity;
+import com.example.restapitest.data.entity.User;
 import com.example.restapitest.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,13 +41,13 @@ public class UserController {
     }
 
     @GetMapping("/v1/users")
-    public List<UserEntity> userV1(){ // 응답 값 엔티티를 직접 외부에 노출 -> 안된다
+    public List<User> userV1(){ // 응답 값 엔티티를 직접 외부에 노출 -> 안된다
         return userService.findMembers();
     }
 
     @GetMapping("/v2/users")
     public Result userV2(){
-        List<UserEntity> findUsers = userService.findMembers();
+        List<User> findUsers = userService.findMembers();
         List<UserDTO> collect = findUsers.stream()
                 .map(m -> new UserDTO( Long.toString(m.getId()),m.getName(),m.getPassword()))
                 .collect(Collectors.toList());
