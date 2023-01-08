@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
-@Setter // 얘를 어떻게 해야하나
 @NoArgsConstructor
 @Entity
 @ToString
@@ -25,4 +24,10 @@ public class UserEntity {
         this.name = name;
         this.password = password;
     }
+
+    public void changeUserInfo(String name, String password){
+        this.name = name;
+        this.password = password;
+    }
+
 }

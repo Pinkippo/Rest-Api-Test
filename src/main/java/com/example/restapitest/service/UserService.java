@@ -35,7 +35,6 @@ public class UserService {
     @Transactional
     public void update(Long id, String name, String password){
         UserEntity userEntity = userRepository.findOne(id);
-        userEntity.setName(name);
-        userEntity.setPassword(password);
+        userEntity.changeUserInfo(name, password);
     }
 }
