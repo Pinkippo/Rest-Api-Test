@@ -27,6 +27,13 @@ public class UserController {
 
     }
 
+    @GetMapping(value = "/get/{id}")
+    public String getU(@PathVariable Long id){
+       User user = userService.getUser(id);
+
+        return user.getName() + user.getPassword();
+    }
+
     @PutMapping("/put/{id}") // 특정 아이디의 정보를 변경
     public void updateUser(@PathVariable("id") Long id,
                              @RequestBody UpdateUserRequest request ){
