@@ -1,7 +1,6 @@
 package com.example.restapitest.service;
 
 import com.example.restapitest.data.dto.OrderDTO;
-import com.example.restapitest.data.dto.OrderItemDTO;
 import com.example.restapitest.data.entity.Order;
 import com.example.restapitest.data.entity.OrderItem;
 import com.example.restapitest.data.entity.User;
@@ -10,7 +9,6 @@ import com.example.restapitest.data.repository.OrderRepository;
 import com.example.restapitest.data.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -41,9 +39,6 @@ public class OrderService {
     public OrderDTO getOrder(Long id){
         Optional<Order> order = orderRepository.findById(id);
         OrderDTO orderDTO = new OrderDTO(order);
-
-
-
         return orderDTO;
     }
 

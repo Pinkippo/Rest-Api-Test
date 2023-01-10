@@ -2,7 +2,6 @@ package com.example.restapitest.data.dto;
 
 import com.example.restapitest.data.entity.Order;
 import com.example.restapitest.data.entity.OrderItem;
-import com.example.restapitest.data.entity.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

@@ -2,8 +2,6 @@ package com.example.restapitest.controller;
 
 
 import com.example.restapitest.data.dto.OrderDTO;
-import com.example.restapitest.data.entity.Order;
-import com.example.restapitest.data.entity.User;
 import com.example.restapitest.service.OrderService;
 import com.example.restapitest.service.UserService;
 
@@ -24,8 +22,7 @@ public class OrderController {
 
     @GetMapping(value = "/get/{id}")
     public OrderDTO getO(@PathVariable Long id){
-       OrderDTO orderDTO = orderService.getOrder(id);
-        return orderDTO;
+        return orderService.getOrder(id);
     }
 
     @PostMapping(value = "/post1") // 주문 생성 API
