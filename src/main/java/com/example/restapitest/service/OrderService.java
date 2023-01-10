@@ -16,22 +16,22 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class OrderService {
 
-    private final UserRepository userRepository;
+    private final UserRepository userRepository; // 레파지토리 연결
     private final OrderRepository orderRepository;
 
     private final OrderItemRepository orderItemRepository;
 
-    public String SaveOrder(Long userId, String item ,int count ){
+    public String SaveOrder(Long userId, String item ,int count ){ // 주문 저장 메소드
 
-        User user = userRepository.findOne(userId);
+        User user = userRepository.findOne(userId); // 유저아이디로 엔티티 받아옴
 
-        OrderItem orderItem = OrderItem.createOrderItem(item,count);
-        orderItemRepository.save(orderItem);
+        OrderItem orderItem = OrderItem.createOrderItem(item,count); // 아이템이랑 수량 받아서 엔티티 생성
+        orderItemRepository.save(orderItem); // 디비에 저장
 
-        Order order = Order.createOrder(user, orderItem);
-        orderRepository.save(order);
+        Order order = Order.createOrder(user, orderItem); // 주문 엔티티 생성
+        orderRepository.save(order); // 디비에 저장
 
-        return order.getUser().getName();
+        return order.getUser().getName(); // 주문의 유저의 이름 반환
     }
 
 

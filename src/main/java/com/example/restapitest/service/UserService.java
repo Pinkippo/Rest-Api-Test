@@ -14,7 +14,7 @@ import java.util.List;
 @Transactional
 public class UserService {
 
-    private final UserRepository userRepository;
+    private final UserRepository userRepository; // 레파지토리 연결
 
     @Transactional
     public String saveUser(UserSaveRequestDTO userSaveRequestDTO){
