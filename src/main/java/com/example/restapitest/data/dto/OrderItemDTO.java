@@ -8,12 +8,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OrderItemDTO {
 
+    private Long id;
     private String itemName;
-    private int count;
+
 
     public OrderItemDTO(OrderItem orderItem){
+        id = orderItem.getId();
         itemName = orderItem.getItem();
-        count = orderItem.getCount();
     }
 
 }

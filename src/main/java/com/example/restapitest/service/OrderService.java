@@ -1,5 +1,7 @@
 package com.example.restapitest.service;
 
+import com.example.restapitest.data.dto.OrderDTO;
+import com.example.restapitest.data.dto.OrderItemDTO;
 import com.example.restapitest.data.entity.Order;
 import com.example.restapitest.data.entity.OrderItem;
 import com.example.restapitest.data.entity.User;
@@ -10,6 +12,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor // final + not null 붙은 것 대신 생성자 생성 -> 의존성 주입
@@ -32,6 +36,15 @@ public class OrderService {
         orderRepository.save(order); // 디비에 저장
 
         return order.getUser().getName(); // 주문의 유저의 이름 반환
+    }
+
+    public OrderDTO getOrder(Long id){
+        Optional<Order> order = orderRepository.findById(id);
+        OrderDTO orderDTO = new OrderDTO(order);
+
+
+
+        return orderDTO;
     }
 
 

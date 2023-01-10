@@ -31,7 +31,6 @@ public class OrderItem {
         OrderItem orderItem = new OrderItem();
         orderItem.setItem(item);
         orderItem.setCount(count);
-
         return orderItem;
     }
 
