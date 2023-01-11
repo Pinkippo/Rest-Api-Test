@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -42,6 +43,9 @@ public class OrderService {
         return orderDTO;
     }
 
+    public List<Order> findorders(){
+        return orderRepository.findAll();
+    }
 
 
 }

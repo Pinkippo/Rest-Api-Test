@@ -2,11 +2,18 @@ package com.example.restapitest.controller;
 
 
 import com.example.restapitest.data.dto.OrderDTO;
+import com.example.restapitest.data.dto.OrderItemDTO;
+import com.example.restapitest.data.entity.Order;
+import com.example.restapitest.data.entity.OrderItem;
 import com.example.restapitest.service.OrderService;
 import com.example.restapitest.service.UserService;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/order")
@@ -29,6 +36,25 @@ public class OrderController {
     public void order(@RequestBody OrderRequestDTO orderDTO){   // 객
         orderService.SaveOrder(orderDTO.getId(), orderDTO.getItem() , orderDTO.getCount());
         // 서비스의 주문 저장 메소드 호출
+    }
+
+
+    @GetMapping(value = "/get/orders")
+    public List<OrderResponseDTO> orders(){
+        List<Order> orders = orderService.findorders();
+        List<OrderResponseDTO> collect = orders.stream().
+                map(m -> new OrderResponseDTO(Long.toString(m.getId()),m.getOrderItems()))
+                .collect(Collectors.toList());
+
+        return collect;
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class OrderResponseDTO{
+        String id;
+        List<OrderItem> orderItems;
+
     }
 
     @Data

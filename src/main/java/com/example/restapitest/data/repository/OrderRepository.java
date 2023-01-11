@@ -9,5 +9,6 @@ public interface OrderRepository extends JpaRepository<Order,Long> { //상속 �
     Order findByUser(String name);
 
     Optional<Order> findById(Long id);
+    
 
 }
