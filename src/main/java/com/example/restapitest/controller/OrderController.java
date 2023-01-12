@@ -27,7 +27,7 @@ public class OrderController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/get/{id}")
+    @GetMapping(value = "/get/{id}") // 특정 아이디로 주문 정보 가져오기
     public OrderDTO getO(@PathVariable Long id){
         return orderService.getOrder(id);
     }
@@ -39,7 +39,7 @@ public class OrderController {
     }
 
 
-    @GetMapping(value = "/get/orders")
+    @GetMapping(value = "/get/orders") //주문 리스트 select
     public List<OrderResponseDTO> orders(){
         List<Order> orders = orderService.findorders();
         List<OrderResponseDTO> collect = orders.stream().
@@ -51,14 +51,14 @@ public class OrderController {
 
     @Data
     @AllArgsConstructor
-    static class OrderResponseDTO{
+    static class OrderResponseDTO{ // 주문 응답 내무 DTO
         String id;
         List<OrderItem> orderItems;
 
     }
 
     @Data
-    static class OrderRequestDTO { // 클래스 내부 DTO
+    static class OrderRequestDTO { // 주문 요청 내부 DTO
         private Long id;
         private String item;
         private int count;
