@@ -49,6 +49,17 @@ public class OrderController {
         return collect;
     }
 
+    @GetMapping(value = "/get/v2/orders")
+    public List<OrderResponseDTO> orderas(){ // 한방쿼리 -> fetch join 사용
+        List<Order> orders = orderService.findorderall();
+        List<OrderResponseDTO> collet = orders.stream().
+                map(m -> new OrderResponseDTO(Long.toString(m.getId()),m.getOrderItems()))
+                .collect(Collectors.toList());
+
+        return collet;
+    }
+
+
     @Data
     @AllArgsConstructor
     static class OrderResponseDTO{ // 주문 응답 내무 DTO

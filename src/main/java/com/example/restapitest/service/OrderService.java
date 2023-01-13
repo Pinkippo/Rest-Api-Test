@@ -47,5 +47,8 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    public List<Order> findorderall(){
+        return orderRepository.findAlls();
+    }
 
 }
