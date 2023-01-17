@@ -12,6 +12,7 @@ public interface OrderRepository extends JpaRepository<Order,Long> { //상속 �
 
     Optional<Order> findById(Long id); //특정 아이디로 찾기
 
+
     @Query("select o from Order o join fetch o.user join fetch o.orderItems")
     List<Order> findAlls();
 

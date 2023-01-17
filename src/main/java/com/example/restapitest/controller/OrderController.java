@@ -38,6 +38,14 @@ public class OrderController {
         // 서비스의 주문 저장 메소드 호출
     }
 
+    @PutMapping(value = "/put/order")
+    public List<OrderItem> Updateorder(@RequestBody OrderUpdateDTO orderDTO){
+
+        return orderService.ChangeOrder
+                (orderDTO.getOrderid(),orderDTO.getUserid(),orderDTO.getItem(), orderDTO.getCount());
+
+    }
+
 
     @GetMapping(value = "/get/orders") //주문 리스트 select
     public List<OrderResponseDTO> orders(){
@@ -71,6 +79,15 @@ public class OrderController {
     @Data
     static class OrderRequestDTO { // 주문 요청 내부 DTO
         private Long id;
+        private String item;
+        private int count;
+
+    }
+
+    @Data
+    static class OrderUpdateDTO { // 주문 요청 내부 DTO
+        private Long userid;
+        private Long orderid;
         private String item;
         private int count;
 

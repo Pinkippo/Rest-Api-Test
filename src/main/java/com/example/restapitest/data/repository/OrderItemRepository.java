@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface OrderItemRepository extends JpaRepository<OrderItem,Long> { // 상속 받아 사용
 
+    public OrderItem findByOrder(Long id);
+
 }

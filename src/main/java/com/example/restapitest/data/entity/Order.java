@@ -33,6 +33,12 @@ public class Order {
         orderItem.setOrder(this);
     }
 
+    public void changeOrderItem(OrderItem orderItem){
+        orderItems.clear();
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
     public static Order createOrder(User user, OrderItem... orderItems) {
         Order order = new Order();
         order.setUser(user);
@@ -42,5 +48,6 @@ public class Order {
         order.setDate(LocalDateTime.now());
         return order;
     }
+
 
 }
