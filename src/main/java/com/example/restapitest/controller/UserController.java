@@ -27,6 +27,13 @@ public class UserController {
 
     }
 
+    @PutMapping("put/change/{id}")
+    public void UpdateUser(@PathVariable("id") Long id,
+            @RequestBody UserSaveRequestDTO userSaveRequestDTO){
+
+        userService.UpdateUser(id,userSaveRequestDTO);
+    }
+
     @GetMapping(value = "/get/{id}")
     public String getU(@PathVariable Long id){
        User user = userService.getUser(id);

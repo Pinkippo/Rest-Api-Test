@@ -28,6 +28,14 @@ public class UserService {
         return user;
     }
 
+    public String UpdateUser(Long id, UserSaveRequestDTO userSaveRequestDTO){ // 유저 정보 수정
+
+        User user = userRepository.findOne(id);
+        user.changeUserInfo(userSaveRequestDTO.getName(),userSaveRequestDTO.getPassword());
+        return user.getName();
+
+    }
+
     public List<User> findMembers() {
         return userRepository.findAll();
     }
