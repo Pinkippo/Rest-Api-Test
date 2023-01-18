@@ -37,16 +37,14 @@ public class OrderService {
         return order.getUser().getName(); // 주문의 유저의 이름 반환
     }
 
-    public List<OrderItem> ChangeOrder(Long orderid, Long userid, String item, int count){
+    public List<OrderItem> ChangeOrder(Long orderid, String item, int count){
 
-        OrderItem orderItem = orderItemRepository.findByOrder(orderid);
-        orderItem.setItem(item);
-        orderItem.setCount(count);
+        Order order = orderRepository.findById(orderid).orElse(null);
+        OrderItem orderItem = OrderItem.createOrderItem(item,count);
 
-        Order order = orderRepository.findById(userid).orElse(null);
         order.changeOrderItem(orderItem);
 
-        return order.getOrderItems();
+        return orderItem.getOrder().getOrderItems();
 
     }
 
@@ -61,7 +59,7 @@ public class OrderService {
     }
 
     public List<Order> findorderall(){
-        return orderRepository.findAlls();
+        return orderRepository.findAllItem();
     }
 
 }

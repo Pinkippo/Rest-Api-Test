@@ -2,27 +2,25 @@ package com.example.restapitest.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED) // 다른 패키지에 소속된 클래스 (상속 제외)
+@AllArgsConstructor
 @Entity
 public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="order_item_id")
+    @Column(name="orderItemId")
     private Long id;
 
     private String item;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "orderId")
     private Order order;
 
     private int count;
@@ -32,6 +30,12 @@ public class OrderItem {
         orderItem.setItem(item);
         orderItem.setCount(count);
         return orderItem;
+    }
+
+    public void updateItem(String item, int count){
+        this.item = item;
+        this.count = count;
+
     }
 
 }

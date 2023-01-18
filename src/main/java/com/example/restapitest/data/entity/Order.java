@@ -11,7 +11,7 @@ import java.util.List;
 @Setter // 잠시 사용
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString
-@Table(name = "user_order")
+@Table(name = "userOrder")
 @Entity
 public class Order {
 
@@ -20,7 +20,7 @@ public class Order {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="userId")
     private User user;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
@@ -34,7 +34,9 @@ public class Order {
     }
 
     public void changeOrderItem(OrderItem orderItem){
+
         orderItems.clear();
+
         orderItems.add(orderItem);
         orderItem.setOrder(this);
     }
