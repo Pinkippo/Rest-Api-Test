@@ -1,13 +1,18 @@
 package com.example.restapitest.service;
 
+import com.example.restapitest.data.dto.KakaoProfileDTO;
 import com.example.restapitest.data.dto.UserSaveRequestDTO;
+import com.example.restapitest.data.entity.KakaoUser;
 import com.example.restapitest.data.entity.User;
+import com.example.restapitest.data.repository.KakaoUserRepository;
 import com.example.restapitest.data.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonElement;
+
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -20,6 +25,8 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository; // 레파지토리 연결
+
+    private final KakaoUserRepository kakaoUserRepository;
 
     @Transactional
     public String saveUser(UserSaveRequestDTO userSaveRequestDTO){
@@ -106,6 +113,64 @@ public class UserService {
         return access_Token;
     }
 
+    public KakaoProfileDTO getKakaoProfile(String token) {
+        String reqURL = "https://kapi.kakao.com/v2/user/me";
 
+
+        //access_token을 이용하여 사용자 정보 조회
+        int id = 0;
+        String nickname = null;
+        try {
+            URL url = new URL(reqURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+            conn.setRequestMethod("POST");
+            conn.setDoOutput(true);
+            conn.setRequestProperty("Authorization", "Bearer " + token); //전송할 header 작성, access_token전송
+
+            //결과 코드가 200이라면 성공
+            int responseCode = conn.getResponseCode();
+            System.out.println("responseCode : " + responseCode);
+
+            //요청을 통해 얻은 JSON타입의 Response 메세지 읽어오기
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line = "";
+            String result = "";
+
+            while ((line = br.readLine()) != null) {
+                result += line;
+            }
+            System.out.println("response body : " + result);
+
+            //Gson 라이브러리로 JSON파싱
+            JsonParser parser = new JsonParser();
+            JsonElement element = parser.parse(result);
+
+            id = element.getAsJsonObject().get("id").getAsInt();
+            nickname = element.getAsJsonObject().get("properties").getAsJsonObject().get("nickname").getAsString();
+
+            System.out.println("id : " + id);
+            System.out.println("nickname : " + nickname);
+
+
+            br.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        KakaoProfileDTO kakaoProfileDTO = new KakaoProfileDTO(Integer.toUnsignedLong(id), nickname);
+        return  kakaoProfileDTO;
+    }
+
+    @Transactional
+    public String saveKakaoUser(KakaoProfileDTO kakaoProfileDTO){
+
+        kakaoUserRepository.save(KakaoUser.builder()
+                .id(kakaoProfileDTO.getId()).name(kakaoProfileDTO.getName()).build()
+                );
+
+        return "가입 완료";
+    }
 
 }

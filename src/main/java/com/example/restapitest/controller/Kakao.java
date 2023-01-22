@@ -1,7 +1,10 @@
 package com.example.restapitest.controller;
 
 
+import com.example.restapitest.data.dto.KakaoProfileDTO;
 import com.example.restapitest.service.UserService;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,8 +22,9 @@ public class Kakao {
     @GetMapping("/kakao")
     public String kakaoCallback(@RequestParam String code) throws Exception{
 
-        userService.getKaKaoAccessToken(code);
-        return "확인되었습니다";
+        String acccesstoken = userService.getKaKaoAccessToken(code);
+        KakaoProfileDTO profileDTO = userService.getKakaoProfile(acccesstoken);
+        return userService.saveKakaoUser(profileDTO);
 
     }
 }
